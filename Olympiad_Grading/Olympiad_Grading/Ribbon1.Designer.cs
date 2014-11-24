@@ -34,9 +34,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.Submit = this.Factory.CreateRibbonButton();
+            this.SubmitButton = this.Factory.CreateRibbonButton();
+            this.AuthenticatonButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             // 
@@ -49,18 +51,27 @@
             // 
             // group1
             // 
-            this.group1.Items.Add(this.Submit);
+            this.group1.Items.Add(this.SubmitButton);
+            this.group1.Items.Add(this.AuthenticatonButton);
             this.group1.Label = "Submit";
             this.group1.Name = "group1";
             // 
-            // Submit
+            // SubmitButton
             // 
-            this.Submit.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.Submit.Image = global::Olympiad_Grading.Properties.Resources.old_edit_redo;
-            this.Submit.Label = "Submit";
-            this.Submit.Name = "Submit";
-            this.Submit.ShowImage = true;
-            this.Submit.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Submit_Click);
+            this.SubmitButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.SubmitButton.Image = global::Olympiad_Grading.Properties.Resources.old_edit_redo;
+            this.SubmitButton.Label = "Submit";
+            this.SubmitButton.Name = "SubmitButton";
+            this.SubmitButton.ShowImage = true;
+            this.SubmitButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Submit_Click);
+            // 
+            // AuthenticatonButton
+            // 
+            this.AuthenticatonButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.AuthenticatonButton.Image = ((System.Drawing.Image)(resources.GetObject("AuthenticatonButton.Image")));
+            this.AuthenticatonButton.Label = "Authentication";
+            this.AuthenticatonButton.Name = "AuthenticatonButton";
+            this.AuthenticatonButton.ShowImage = true;
             // 
             // Ribbon1
             // 
@@ -79,7 +90,8 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton Submit;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton SubmitButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton AuthenticatonButton;
     }
 
     partial class ThisRibbonCollection
