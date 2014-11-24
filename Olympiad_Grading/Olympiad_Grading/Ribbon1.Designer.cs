@@ -72,6 +72,7 @@
             this.AuthenticatonButton.Label = "Authentication";
             this.AuthenticatonButton.Name = "AuthenticatonButton";
             this.AuthenticatonButton.ShowImage = true;
+            this.AuthenticatonButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Authentication_Click);
             // 
             // Ribbon1
             // 
