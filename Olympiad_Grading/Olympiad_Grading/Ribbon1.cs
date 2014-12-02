@@ -15,7 +15,11 @@ namespace Olympiad_Grading
 
         private void Submit_Click(object sender, RibbonControlEventArgs e)
         {
-
+            Verification verify = new Verification();
+            if(verify.verifyData())
+            {
+                
+            }
         }
 
         private void Authentication_Click(object sender, RibbonControlEventArgs e)
