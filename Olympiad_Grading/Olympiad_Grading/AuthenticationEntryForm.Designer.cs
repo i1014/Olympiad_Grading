@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthenticationEntryForm));
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.AuthExplinationTextBox = new System.Windows.Forms.TextBox();
             this.KeyLabel = new System.Windows.Forms.Label();
             this.SubmitButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.SubmitCancelTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.AuthEntryLabel = new System.Windows.Forms.Label();
             this.SubmitCancelTableLayout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,17 +44,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(256, 20);
             this.textBox1.TabIndex = 1;
-            // 
-            // AuthExplinationTextBox
-            // 
-            this.AuthExplinationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.AuthExplinationTextBox.Location = new System.Drawing.Point(13, 13);
-            this.AuthExplinationTextBox.Multiline = true;
-            this.AuthExplinationTextBox.Name = "AuthExplinationTextBox";
-            this.AuthExplinationTextBox.ReadOnly = true;
-            this.AuthExplinationTextBox.Size = new System.Drawing.Size(286, 20);
-            this.AuthExplinationTextBox.TabIndex = 0;
-            this.AuthExplinationTextBox.Text = "Please enter your authentication key provided by Avogadro";
             // 
             // KeyLabel
             // 
@@ -73,6 +62,7 @@
             this.SubmitButton.TabIndex = 3;
             this.SubmitButton.Text = "Submit";
             this.SubmitButton.UseVisualStyleBackColor = true;
+            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // CancelButton
             // 
@@ -82,6 +72,7 @@
             this.CancelButton.TabIndex = 4;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // SubmitCancelTableLayout
             // 
@@ -98,15 +89,24 @@
             this.SubmitCancelTableLayout.Size = new System.Drawing.Size(287, 42);
             this.SubmitCancelTableLayout.TabIndex = 5;
             // 
+            // AuthEntryLabel
+            // 
+            this.AuthEntryLabel.AutoSize = true;
+            this.AuthEntryLabel.Location = new System.Drawing.Point(12, 9);
+            this.AuthEntryLabel.Name = "AuthEntryLabel";
+            this.AuthEntryLabel.Size = new System.Drawing.Size(286, 13);
+            this.AuthEntryLabel.TabIndex = 6;
+            this.AuthEntryLabel.Text = "Please enter your authentication key provided by Avogadro";
+            // 
             // AuthenticationEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(311, 119);
+            this.Controls.Add(this.AuthEntryLabel);
             this.Controls.Add(this.SubmitCancelTableLayout);
             this.Controls.Add(this.KeyLabel);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.AuthExplinationTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -123,11 +123,11 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox AuthExplinationTextBox;
         private System.Windows.Forms.Label KeyLabel;
         private System.Windows.Forms.Button SubmitButton;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.TableLayoutPanel SubmitCancelTableLayout;
+        private System.Windows.Forms.Label AuthEntryLabel;
 
     }
 }
