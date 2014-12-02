@@ -20,7 +20,8 @@ namespace Olympiad_Grading
 
         private void Authentication_Click(object sender, RibbonControlEventArgs e)
         {
-            Console.WriteLine("Authentication Button Clicked");
+            var authEntryForm = new AuthenticationEntryForm();
+            authEntryForm.Show();
         }
     }
 }
