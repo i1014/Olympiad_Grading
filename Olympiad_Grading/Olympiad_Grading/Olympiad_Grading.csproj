@@ -216,6 +216,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Verification.cs" />
     <EmbeddedResource Include="AuthenticationEntryForm.resx">
       <DependentUpon>AuthenticationEntryForm.cs</DependentUpon>
     </EmbeddedResource>

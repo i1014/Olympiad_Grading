@@ -12,9 +12,9 @@ namespace Olympiad_Grading
 
         }
 
-        public bool verifyData(Excel.Application MasterObj)
+        public bool verifyData()
         {
-
+            
             return false;
         }
     }
