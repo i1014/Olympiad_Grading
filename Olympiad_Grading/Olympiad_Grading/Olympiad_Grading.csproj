@@ -213,6 +213,8 @@
     <Compile Include="AuthenticationEntryForm.Designer.cs">
       <DependentUpon>AuthenticationEntryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comm\Credentials.cs" />
+    <Compile Include="Comm\JsonRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
