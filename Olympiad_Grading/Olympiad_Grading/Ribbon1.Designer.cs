@@ -39,6 +39,8 @@
             this.group1 = this.Factory.CreateRibbonGroup();
             this.SubmitButton = this.Factory.CreateRibbonButton();
             this.AuthenticatonButton = this.Factory.CreateRibbonButton();
+            this.gradeButton = this.Factory.CreateRibbonButton();
+            this.nameButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             // 
@@ -51,6 +53,8 @@
             // 
             // group1
             // 
+            this.group1.Items.Add(this.gradeButton);
+            this.group1.Items.Add(this.nameButton);
             this.group1.Items.Add(this.SubmitButton);
             this.group1.Items.Add(this.AuthenticatonButton);
             this.group1.Label = "Submit";
@@ -74,6 +78,22 @@
             this.AuthenticatonButton.ShowImage = true;
             this.AuthenticatonButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Authentication_Click);
             // 
+            // gradeButton
+            // 
+            this.gradeButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.gradeButton.Label = "Set Grades";
+            this.gradeButton.Name = "gradeButton";
+            this.gradeButton.ShowImage = true;
+            this.gradeButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.gradeButton_Click);
+            // 
+            // nameButton
+            // 
+            this.nameButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.nameButton.Label = "Set Team Name";
+            this.nameButton.Name = "nameButton";
+            this.nameButton.ShowImage = true;
+            this.nameButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.nameButton_Click);
+            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
@@ -93,6 +113,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton SubmitButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton AuthenticatonButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton gradeButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton nameButton;
     }
 
     partial class ThisRibbonCollection
