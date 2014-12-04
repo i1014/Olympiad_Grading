@@ -18,12 +18,12 @@ namespace Olympiad_Grading.AvaComm.Poco
 
         public string toAuth()
         {
-            return "Basic" + " " + EncodeCredentials(Credentials);
+            return "Basic" + " " + EncodeCredentials();
         }
 
-        internal static string EncodeCredentials(Credentials credentials)
+        internal string EncodeCredentials()
         {
-            var strCredentials = string.Format("{0}:{1}", credentials.UserName, credentials.Password);
+            var strCredentials = string.Format("{0}:{1}", UserName, Password);
             var encodedCredentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(strCredentials));
 
             return encodedCredentials;

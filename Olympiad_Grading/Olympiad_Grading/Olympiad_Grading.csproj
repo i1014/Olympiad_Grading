@@ -154,7 +154,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>FA4B267B50BF2AF833DE12E60DE941E2360A9568</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>118FC1D67AF889F96FA5F1D4934654D3CED16DA7</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
