@@ -218,7 +218,9 @@
       <DependentUpon>AuthenticationEntryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AvaComm\JsonRequest.cs" />
-    <Compile Include="AvaComm\Poco\Credentials.cs" />
+    <Compile Include="AvaComm\Poco\ApiAuth.cs" />
+    <Compile Include="AvaComm\Poco\BasicAuth.cs" />
+    <Compile Include="AvaComm\Poco\Credential.cs" />
     <Compile Include="AvaComm\WebServiceConnection.cs" />
     <Compile Include="DataConfirmation\DataConfirmationForm.cs">
       <SubType>Form</SubType>
