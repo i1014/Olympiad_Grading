@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Olympiad_Grading.AvaComm
 {
-    public class Credentials
+    interface Credential
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string toAuth();
     }
 }
