@@ -11,12 +11,12 @@ namespace Olympiad_Grading.AvaComm
         /// <summary>
         /// Url of http server wich request will be created to.
         /// </summary>
-        public String URL { get; set; }
+        public String URL { get; private set; }
 
         /// <summary>
         /// HTTP Verb wich will be used. Eg. GET, POST, PUT, DELETE.
         /// </summary>
-        public String Verb { get; set; }
+        public String Verb { get; private set; }
 
         /// <summary>
         /// Request content, Json by default.
@@ -29,7 +29,7 @@ namespace Olympiad_Grading.AvaComm
         /// <summary>
         /// User and Password for Basic Authentication
         /// </summary>
-        public Credentials Credentials { get; set; }
+        public Credential Credentials { get; private set; }
 
         public HttpWebRequest HttpRequest { get; internal set; }
         public HttpWebResponse HttpResponse { get; internal set; }
@@ -40,16 +40,17 @@ namespace Olympiad_Grading.AvaComm
         /// </summary>
         /// <param name="url">URL which request will be created</param>
         /// <param name="verb">Http Verb that will be userd in this request</param>
-        public JsonRequest(string url, string verb)
+        public JsonRequest(string url, string verb, Credential credentials)
         {
             URL = url;
             Verb = verb;
+            Credentials = credentials;
         }
 
         /// <summary>
         /// Default constructor overload without any paramter
         /// </summary>
-        public JsonRequest()
+        private JsonRequest()
         {
             Verb = "GET";
         }
@@ -192,7 +193,7 @@ namespace Olympiad_Grading.AvaComm
             basicRequest.CookieContainer = CookieContainer;
 
             if (Credentials != null)
-                basicRequest.Headers.Add("Authorization", "Basic" + " " + EncodeCredentials(Credentials));
+                basicRequest.Headers.Add("Authorization", Credentials.toAuth());
 
             return basicRequest;
         }
@@ -226,12 +227,6 @@ namespace Olympiad_Grading.AvaComm
                     return streamReader.ReadToEnd();
         }
 
-        internal static string EncodeCredentials(Credentials credentials)
-        {
-            var strCredentials = string.Format("{0}:{1}", credentials.UserName, credentials.Password);
-            var encodedCredentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(strCredentials));
-
-            return encodedCredentials;
-        }
+        
     }
 }
