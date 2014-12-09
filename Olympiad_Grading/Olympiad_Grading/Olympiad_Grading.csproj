@@ -150,11 +150,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>Olympiad_Grading_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>172202A28B8140D5315F7624006349D320B49E71</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>CAA537FD1EFEAAA34FF6616787DB0857072EE4F8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
@@ -212,7 +211,9 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Authentication\AuthenticationEntryForm.cs" />
+    <Compile Include="Authentication\AuthenticationEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Authentication\AuthenticationEntryForm.Designer.cs">
       <DependentUpon>AuthenticationEntryForm.cs</DependentUpon>
     </Compile>
@@ -221,7 +222,9 @@
     <Compile Include="AvaComm\Poco\BasicAuth.cs" />
     <Compile Include="AvaComm\Poco\Credential.cs" />
     <Compile Include="AvaComm\WebServiceConnection.cs" />
-    <Compile Include="DataConfirmation\DataConfirmationForm.cs" />
+    <Compile Include="DataConfirmation\DataConfirmationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DataConfirmation\DataConfirmationForm.Designer.cs">
       <DependentUpon>DataConfirmationForm.cs</DependentUpon>
     </Compile>
@@ -249,7 +252,7 @@
     <EmbeddedResource Include="Ribbon1.resx">
       <DependentUpon>Ribbon1.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Olympiad_Grading_TemporaryKey.pfx" />
+    <None Include="Olympiad_Grading_1_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

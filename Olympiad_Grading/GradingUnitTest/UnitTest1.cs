@@ -1,4 +1,5 @@
 ﻿using System;
+using Olympiad_Grading.AvaComm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GradingUnitTest
