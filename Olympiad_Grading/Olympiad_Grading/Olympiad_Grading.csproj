@@ -212,10 +212,8 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="AuthenticationEntryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AuthenticationEntryForm.Designer.cs">
+    <Compile Include="Authentication\AuthenticationEntryForm.cs" />
+    <Compile Include="Authentication\AuthenticationEntryForm.Designer.cs">
       <DependentUpon>AuthenticationEntryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AvaComm\JsonRequest.cs" />
@@ -223,12 +221,20 @@
     <Compile Include="AvaComm\Poco\BasicAuth.cs" />
     <Compile Include="AvaComm\Poco\Credential.cs" />
     <Compile Include="AvaComm\WebServiceConnection.cs" />
+    <Compile Include="DataConfirmation\DataConfirmationForm.cs" />
+    <Compile Include="DataConfirmation\DataConfirmationForm.Designer.cs">
+      <DependentUpon>DataConfirmationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataConfirmation\Models\TeamScores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Verification.cs" />
-    <EmbeddedResource Include="AuthenticationEntryForm.resx">
+    <EmbeddedResource Include="Authentication\AuthenticationEntryForm.resx">
       <DependentUpon>AuthenticationEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataConfirmation\DataConfirmationForm.resx">
+      <DependentUpon>DataConfirmationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
