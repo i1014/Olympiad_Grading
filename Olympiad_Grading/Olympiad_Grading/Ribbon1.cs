@@ -23,16 +23,29 @@ namespace Olympiad_Grading
 
         private void Submit_Click(object sender, RibbonControlEventArgs e)
         {
-            if(grades.Length != teams.Length)
+            if (grades.Length < teams.Length)
             {
                 MessageBox.Show("Teams do not all have a corresponding score.\nRe-select the grades or team names.");
+            }
+            else if (grades.Length > teams.Length)
+            {
+                MessageBox.Show("Grades do not all have a corresponding team.\nRe-select the grades or team names.");
+            }
+            else if (grades.Length == 0)
+            {
+                MessageBox.Show("Grades are not selected.\nRe-select the grades.");
+            }
+            else if (teams.Length == 0)
+            {
+                MessageBox.Show("Teams are not selected.\nRe-select the teams.");
             }
             // Launches the Data Confirmation Form for the user to read over
             // Needs a string double dictionary to be valid
             Dictionary<string, double> testDic = new Dictionary<string, double>();
-            testDic.Add("Leopard HS", 123.22);
-            testDic.Add("Jaguar HS", 150.0);
-            testDic.Add("Lion HS", 0.62);
+            for (int i = 0; i < grades.Length; i++)
+            {
+                testDic.Add(teams[i], grades[i]);
+            }
             var test = new DataConfirmationForm(new TeamScores(testDic));
             test.Show();
         }

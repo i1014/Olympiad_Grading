@@ -37,7 +37,7 @@ namespace Olympiad_Grading
                 }
                 for(int j = i+1; j < nameData.Length; j++)
                 {
-                    if(nameData[i].Equals(nameData[j]))
+                    if(nameData[i].ToLower().Equals(nameData[j].ToLower()))
                     {
                         MessageBox.Show("Names are not all unique.");
                         return false;
