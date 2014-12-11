@@ -8,14 +8,17 @@ namespace Olympiad_Grading
 {
     public partial class AuthenticationEntryForm : Form
     {
-        public AuthenticationEntryForm()
+        Ribbon1 dataStore;
+        public AuthenticationEntryForm(Ribbon1 main)
         {
+            dataStore = main;
             InitializeComponent();
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-
+            dataStore.authKey = this.textBox1.Text;
+            this.Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

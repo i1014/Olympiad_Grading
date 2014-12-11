@@ -15,6 +15,9 @@ namespace Olympiad_Grading
         Verification verify;
         double[] grades = new double[0];
         string[] teams = new string[0];
+        public string authKey = "";
+        public string urlEnd = ""; // need to set to used in the DataConfirmationForm
+        public string tempUrlEnd = "http://requestb.in/10oyxu81"; // current end point for testing
 
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
@@ -46,13 +49,13 @@ namespace Olympiad_Grading
             {
                 testDic.Add(teams[i], grades[i]);
             }
-            var test = new DataConfirmationForm(new TeamScores(testDic));
+            var test = new DataConfirmationForm(new TeamScores(testDic), this);
             test.Show();
         }
 
         private void Authentication_Click(object sender, RibbonControlEventArgs e)
         {
-            var authEntryForm = new AuthenticationEntryForm();
+            var authEntryForm = new AuthenticationEntryForm(this);
             authEntryForm.Show();
         }
 
