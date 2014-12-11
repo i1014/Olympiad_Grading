@@ -7,16 +7,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Olympiad_Grading.AvaComm;
+using Olympiad_Grading.AvaComm.Poco;
 
 namespace Olympiad_Grading.DataConfirmation
 {
     public partial class DataConfirmationForm : Form
     {
         public TeamScores TeamScores { get; set; }
+        public Ribbon1 dataStore;
 
-        public DataConfirmationForm(TeamScores teamScores)
+        public DataConfirmationForm(TeamScores teamScores, Ribbon1 main)
         {
             this.TeamScores = teamScores;
+            dataStore = main;
             InitializeComponent();
             AddDataToList();
         }
@@ -34,6 +38,11 @@ namespace Olympiad_Grading.DataConfirmation
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
+            ApiAuth cred = new ApiAuth(dataStore.authKey);
+            string endPoint = dataStore.urlEnd;
+            string tempEndPoint = dataStore.tempUrlEnd;
+            JsonRequest jr = new JsonRequest(tempEndPoint, "POST", cred);
+            jr.Execute(TeamScores);
             this.Close();
         }
 
