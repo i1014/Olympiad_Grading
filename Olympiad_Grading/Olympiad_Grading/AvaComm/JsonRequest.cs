@@ -47,45 +47,11 @@ namespace Olympiad_Grading.AvaComm
             Credentials = credentials;
         }
 
-        /// <summary>
-        /// Default constructor overload without any paramter
-        /// </summary>
-        private JsonRequest()
+        public object Execute<TT>(object obj)
         {
-            Verb = "GET";
-        }
-
-        public object Execute<TT>(string url, object obj, string verb)
-        {
-            if (url != null)
-                URL = url;
-
-            if (verb != null)
-                Verb = verb;
-
             HttpRequest = CreateRequest();
 
             WriteStream(obj);
-
-            try
-            {
-                HttpResponse = (HttpWebResponse)HttpRequest.GetResponse();
-            }
-            catch (WebException error)
-            {
-                HttpResponse = (HttpWebResponse)error.Response;
-                return ReadResponseFromError(error);
-            }
-
-            return JsonConvert.DeserializeObject<TT>(ReadResponse());
-        }
-
-        public object Execute<TT>(string url)
-        {
-            if (url != null)
-                URL = url;
-
-            HttpRequest = CreateRequest();
 
             try
             {
@@ -120,14 +86,8 @@ namespace Olympiad_Grading.AvaComm
             return JsonConvert.DeserializeObject<TT>(ReadResponse());
         }
 
-        public object Execute(string url, object obj, string verb)
+        public object Execute(object obj)
         {
-            if (url != null)
-                URL = url;
-
-            if (verb != null)
-                Verb = verb;
-
             HttpRequest = CreateRequest();
 
             WriteStream(obj);
@@ -139,26 +99,6 @@ namespace Olympiad_Grading.AvaComm
             catch (WebException error)
             {
                 HttpResponse = (HttpWebResponse) error.Response;
-                return ReadResponseFromError(error);
-            }
-
-            return ReadResponse();
-        }
-
-        public object Execute(string url)
-        {
-            if (url != null)
-                URL = url;
-
-            HttpRequest = CreateRequest();
-
-            try
-            {
-                HttpResponse = (HttpWebResponse)HttpRequest.GetResponse();
-            }
-            catch (WebException error)
-            {
-                HttpResponse = (HttpWebResponse)error.Response;
                 return ReadResponseFromError(error);
             }
 

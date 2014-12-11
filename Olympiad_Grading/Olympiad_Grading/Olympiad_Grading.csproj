@@ -150,10 +150,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Olympiad_Grading_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>CAA537FD1EFEAAA34FF6616787DB0857072EE4F8</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>118FC1D67AF889F96FA5F1D4934654D3CED16DA7</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
