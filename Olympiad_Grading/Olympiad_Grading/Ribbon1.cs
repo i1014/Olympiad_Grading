@@ -60,8 +60,19 @@ namespace Olympiad_Grading
         {
             Excel.Application currentApp = Globals.ThisAddIn.Application as Excel.Application;
             Excel.Range selected = currentApp.Selection as Excel.Range;
-            System.Array myvalues = (System.Array)selected.Cells.Value;
-            string[] nameData = verify.ConvertToStringArray(myvalues);
+            
+            string[] nameData;
+            try
+            {
+                System.Array myvalues = (System.Array)selected.Cells.Value;
+                nameData = verify.ConvertToStringArray(myvalues);
+            }
+            catch
+            {
+                string a = selected.Cells.Value;
+                nameData = new string[] {a};
+            }
+            
             if (verify.verifyName(nameData))
             {
                 teams = nameData;
@@ -72,8 +83,17 @@ namespace Olympiad_Grading
         {
             Excel.Application currentApp = Globals.ThisAddIn.Application as Excel.Application;
             Excel.Range selected = currentApp.Selection as Excel.Range;
-            System.Array myvalues = (System.Array)selected.Cells.Value;
-            string[] testData = verify.ConvertToStringArray(myvalues);
+            string[] testData;
+            try
+            {
+                System.Array myvalues = (System.Array)selected.Cells.Value;
+                testData = verify.ConvertToStringArray(myvalues);
+            }
+            catch
+            {
+                string a = selected.Cells.Value;
+                testData = new string[] { a };
+            }
             if (verify.verifyData(testData))
             {
                 grades = new double[testData.Length];
