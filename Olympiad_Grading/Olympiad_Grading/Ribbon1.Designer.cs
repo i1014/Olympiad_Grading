@@ -37,10 +37,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.SubmitButton = this.Factory.CreateRibbonButton();
-            this.AuthenticatonButton = this.Factory.CreateRibbonButton();
             this.gradeButton = this.Factory.CreateRibbonButton();
             this.nameButton = this.Factory.CreateRibbonButton();
+            this.SubmitButton = this.Factory.CreateRibbonButton();
+            this.AuthenticatonButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             // 
@@ -60,6 +60,22 @@
             this.group1.Label = "Submit";
             this.group1.Name = "group1";
             // 
+            // gradeButton
+            // 
+            this.gradeButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.gradeButton.Label = "Set Grades";
+            this.gradeButton.Name = "gradeButton";
+            this.gradeButton.ShowImage = true;
+            this.gradeButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.gradeButton_Click);
+            // 
+            // nameButton
+            // 
+            this.nameButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.nameButton.Label = "Set Team Name";
+            this.nameButton.Name = "nameButton";
+            this.nameButton.ShowImage = true;
+            this.nameButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.nameButton_Click);
+            // 
             // SubmitButton
             // 
             this.SubmitButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -77,22 +93,6 @@
             this.AuthenticatonButton.Name = "AuthenticatonButton";
             this.AuthenticatonButton.ShowImage = true;
             this.AuthenticatonButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Authentication_Click);
-            // 
-            // gradeButton
-            // 
-            this.gradeButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.gradeButton.Label = "Set Grades";
-            this.gradeButton.Name = "gradeButton";
-            this.gradeButton.ShowImage = true;
-            this.gradeButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.gradeButton_Click);
-            // 
-            // nameButton
-            // 
-            this.nameButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.nameButton.Label = "Set Team Name";
-            this.nameButton.Name = "nameButton";
-            this.nameButton.ShowImage = true;
-            this.nameButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.nameButton_Click);
             // 
             // Ribbon1
             // 
