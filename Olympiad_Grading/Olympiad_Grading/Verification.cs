@@ -62,7 +62,7 @@ namespace Olympiad_Grading
                     MessageBox.Show("Data is not all numbers.");
                     return false;
                 }
-                if(blank <= 0)
+                if(blank < 0)
                 {
                     MessageBox.Show("Data is not all positive.");
                     return false;
