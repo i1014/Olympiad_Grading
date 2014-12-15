@@ -29,18 +29,22 @@ namespace Olympiad_Grading
             if (grades.Length < teams.Length)
             {
                 MessageBox.Show("Teams do not all have a corresponding score.\nRe-select the grades or team names.");
+                return;
             }
             else if (grades.Length > teams.Length)
             {
                 MessageBox.Show("Grades do not all have a corresponding team.\nRe-select the grades or team names.");
+                return;
             }
             else if (grades.Length == 0)
             {
                 MessageBox.Show("Grades are not selected.\nRe-select the grades.");
+                return;
             }
             else if (teams.Length == 0)
             {
                 MessageBox.Show("Teams are not selected.\nRe-select the teams.");
+                return;
             }
             // Launches the Data Confirmation Form for the user to read over
             // Needs a string double dictionary to be valid
@@ -72,7 +76,7 @@ namespace Olympiad_Grading
             }
             catch
             {
-                string a = selected.Cells.Value;
+                string a = selected.Cells.Value.ToString();
                 nameData = new string[] {a};
             }
             
@@ -94,7 +98,7 @@ namespace Olympiad_Grading
             }
             catch
             {
-                string a = selected.Cells.Value;
+                string a = selected.Cells.Value.ToString();
                 testData = new string[] { a };
             }
             if (verify.verifyData(testData))

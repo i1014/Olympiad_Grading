@@ -38,6 +38,11 @@ namespace Olympiad_Grading.DataConfirmation
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrWhiteSpace(dataStore.authKey))
+            {
+                MessageBox.Show("Authentication Key not set.\nRe-enter the Authentication Key.");
+                return;
+            }
             ApiAuth cred = new ApiAuth(dataStore.authKey);
             string endPoint = dataStore.urlEnd;
             string tempEndPoint = dataStore.tempUrlEnd;
