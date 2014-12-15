@@ -15,9 +15,9 @@ namespace Olympiad_Grading.DataConfirmation
     public partial class DataConfirmationForm : Form
     {
         public TeamScores TeamScores { get; set; }
-        public Ribbon1 dataStore;
+        public OlympiadRibbon dataStore;
 
-        public DataConfirmationForm(TeamScores teamScores, Ribbon1 main)
+        public DataConfirmationForm(TeamScores teamScores, OlympiadRibbon main)
         {
             this.TeamScores = teamScores;
             dataStore = main;

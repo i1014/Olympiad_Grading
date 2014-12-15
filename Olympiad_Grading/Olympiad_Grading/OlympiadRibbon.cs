@@ -10,7 +10,7 @@ using Olympiad_Grading.DataConfirmation.Models;
 
 namespace Olympiad_Grading
 {
-    public partial class Ribbon1
+    public partial class OlympiadRibbon
     {
         Verification verify;
         double[] grades = new double[0];

@@ -8,8 +8,8 @@ namespace Olympiad_Grading
 {
     public partial class AuthenticationEntryForm : Form
     {
-        Ribbon1 dataStore;
-        public AuthenticationEntryForm(Ribbon1 main)
+        OlympiadRibbon dataStore;
+        public AuthenticationEntryForm(OlympiadRibbon main)
         {
             dataStore = main;
             InitializeComponent();
