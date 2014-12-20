@@ -5,8 +5,8 @@ using System.Text;
 using Microsoft.Office.Tools.Ribbon;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-using Olympiad_Grading.DataConfirmation;
 using Olympiad_Grading.DataConfirmation.Models;
+using Olympiad_Grading.Wizard;
 
 namespace Olympiad_Grading
 {
@@ -17,7 +17,7 @@ namespace Olympiad_Grading
         string[] teams = new string[0];
         public string authKey = "";
         public string urlEnd = ""; // need to set to used in the DataConfirmationForm
-        public string tempUrlEnd = "http://requestb.in/10oyxu81"; // current end point for testing
+        public string tempUrlEnd = "http://requestb.in/1ivqad81"; // current end point for testing
 
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
@@ -53,8 +53,7 @@ namespace Olympiad_Grading
             {
                 testDic.Add(teams[i], grades[i]);
             }
-            var test = new DataConfirmationForm(new TeamScores(testDic), this);
-            test.Show();
+            
         }
 
         private void Authentication_Click(object sender, RibbonControlEventArgs e)
@@ -109,6 +108,13 @@ namespace Olympiad_Grading
                     grades[i] = Double.Parse(testData[i]);
                 }
             }
+        }
+
+        private void LaunchWizardButton_Click(object sender, RibbonControlEventArgs e)
+        {
+
+            var wizardForm = new WizardForm();
+            wizardForm.Show();
         }
     }
 }

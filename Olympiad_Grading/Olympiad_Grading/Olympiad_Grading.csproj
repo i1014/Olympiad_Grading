@@ -154,7 +154,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>172202A28B8140D5315F7624006349D320B49E71</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>CAA537FD1EFEAAA34FF6616787DB0857072EE4F8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
@@ -223,22 +223,19 @@
     <Compile Include="AvaComm\Poco\BasicAuth.cs" />
     <Compile Include="AvaComm\Poco\Credential.cs" />
     <Compile Include="AvaComm\WebServiceConnection.cs" />
-    <Compile Include="DataConfirmation\DataConfirmationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DataConfirmation\DataConfirmationForm.Designer.cs">
-      <DependentUpon>DataConfirmationForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataConfirmation\Models\TeamScores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Verification.cs" />
+    <Compile Include="Wizard\WizardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizard\WizardForm.Designer.cs">
+      <DependentUpon>WizardForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Authentication\AuthenticationEntryForm.resx">
       <DependentUpon>AuthenticationEntryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DataConfirmation\DataConfirmationForm.resx">
-      <DependentUpon>DataConfirmationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -252,6 +249,9 @@
     </Compile>
     <EmbeddedResource Include="OlympiadRibbon.resx">
       <DependentUpon>OlympiadRibbon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizard\WizardForm.resx">
+      <DependentUpon>WizardForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Olympiad_Grading_1_TemporaryKey.pfx" />
     <None Include="packages.config" />
