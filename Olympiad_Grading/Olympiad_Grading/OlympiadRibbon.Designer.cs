@@ -38,10 +38,6 @@
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.LaunchWizardButton = this.Factory.CreateRibbonButton();
-            this.SetTeamNamesButton = this.Factory.CreateRibbonButton();
-            this.SetGradesButton = this.Factory.CreateRibbonButton();
-            this.SubmitButton = this.Factory.CreateRibbonButton();
-            this.AuthenticatonButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             // 
@@ -55,56 +51,17 @@
             // group1
             // 
             this.group1.Items.Add(this.LaunchWizardButton);
-            this.group1.Items.Add(this.SetTeamNamesButton);
-            this.group1.Items.Add(this.SetGradesButton);
-            this.group1.Items.Add(this.SubmitButton);
-            this.group1.Items.Add(this.AuthenticatonButton);
-            this.group1.Label = "Submit";
+            this.group1.Label = "Score Submission";
             this.group1.Name = "group1";
             // 
             // LaunchWizardButton
             // 
             this.LaunchWizardButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.LaunchWizardButton.Image = ((System.Drawing.Image)(resources.GetObject("LaunchWizardButton.Image")));
             this.LaunchWizardButton.Label = "Launch Wizard";
             this.LaunchWizardButton.Name = "LaunchWizardButton";
             this.LaunchWizardButton.ShowImage = true;
             this.LaunchWizardButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.LaunchWizardButton_Click);
-            // 
-            // SetTeamNamesButton
-            // 
-            this.SetTeamNamesButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.SetTeamNamesButton.Label = "Set Team Names";
-            this.SetTeamNamesButton.Name = "SetTeamNamesButton";
-            this.SetTeamNamesButton.ScreenTip = "Highlight team names and click this button to save them";
-            this.SetTeamNamesButton.ShowImage = true;
-            this.SetTeamNamesButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.nameButton_Click);
-            // 
-            // SetGradesButton
-            // 
-            this.SetGradesButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.SetGradesButton.Label = "Set Grades";
-            this.SetGradesButton.Name = "SetGradesButton";
-            this.SetGradesButton.ScreenTip = "Highlight scores and click this button to save them";
-            this.SetGradesButton.ShowImage = true;
-            this.SetGradesButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.gradeButton_Click);
-            // 
-            // SubmitButton
-            // 
-            this.SubmitButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.SubmitButton.Image = global::Olympiad_Grading.Properties.Resources.old_edit_redo;
-            this.SubmitButton.Label = "Submit";
-            this.SubmitButton.Name = "SubmitButton";
-            this.SubmitButton.ShowImage = true;
-            this.SubmitButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Submit_Click);
-            // 
-            // AuthenticatonButton
-            // 
-            this.AuthenticatonButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.AuthenticatonButton.Image = ((System.Drawing.Image)(resources.GetObject("AuthenticatonButton.Image")));
-            this.AuthenticatonButton.Label = "Authentication";
-            this.AuthenticatonButton.Name = "AuthenticatonButton";
-            this.AuthenticatonButton.ShowImage = true;
-            this.AuthenticatonButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Authentication_Click);
             // 
             // OlympiadRibbon
             // 
@@ -123,10 +80,6 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton SubmitButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton AuthenticatonButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton SetGradesButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton SetTeamNamesButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton LaunchWizardButton;
     }
 

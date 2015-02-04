@@ -284,6 +284,9 @@
   <ItemGroup>
     <None Include="Resources\old_edit_redo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\wizar_icon.png" />
+  </ItemGroup>
   <!-- Include the build rules for a C# project. -->
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

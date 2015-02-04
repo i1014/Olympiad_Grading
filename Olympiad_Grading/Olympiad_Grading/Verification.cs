@@ -7,7 +7,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Olympiad_Grading
 {
-    class Verification
+    public class Verification
     {
         public Verification()
         {

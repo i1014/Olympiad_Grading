@@ -39,18 +39,18 @@
             this.EventSelectionGroupBox = new System.Windows.Forms.GroupBox();
             this.EventSelectionComboBox = new System.Windows.Forms.ComboBox();
             this.AuthenticationGroupBox = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.AuthenticationTextBox = new System.Windows.Forms.TextBox();
             this.AuthenticationLabel = new System.Windows.Forms.Label();
             this.SetTiersButton = new System.Windows.Forms.Button();
             this.SetTeamsButton = new System.Windows.Forms.Button();
             this.DataGroupBox = new System.Windows.Forms.GroupBox();
             this.SetDataTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.TiersLabel = new System.Windows.Forms.Label();
-            this.TeamsLabel = new System.Windows.Forms.Label();
             this.TiebreakersLabel = new System.Windows.Forms.Label();
+            this.ScoresLabel = new System.Windows.Forms.Label();
+            this.TiersLabel = new System.Windows.Forms.Label();
             this.SetScoresButton = new System.Windows.Forms.Button();
             this.SetTiebreakersButton = new System.Windows.Forms.Button();
-            this.ScoresLabel = new System.Windows.Forms.Label();
+            this.TeamsLabel = new System.Windows.Forms.Label();
             this.EventSelectionGroupBox.SuspendLayout();
             this.AuthenticationGroupBox.SuspendLayout();
             this.DataGroupBox.SuspendLayout();
@@ -67,6 +67,7 @@
             this.CancelButton.TabIndex = 4;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // SubmitButton
             // 
@@ -77,6 +78,7 @@
             this.SubmitButton.TabIndex = 5;
             this.SubmitButton.Text = "Submit";
             this.SubmitButton.UseVisualStyleBackColor = true;
+            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // ScoresListView
             // 
@@ -113,7 +115,7 @@
             // Tiebreaker
             // 
             this.Tiebreaker.Text = "Tiebreaker";
-            this.Tiebreaker.Width = 85;
+            this.Tiebreaker.Width = 90;
             // 
             // EventSelectionLabel
             // 
@@ -140,6 +142,7 @@
             // EventSelectionComboBox
             // 
             this.EventSelectionComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EventSelectionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EventSelectionComboBox.FormattingEnabled = true;
             this.EventSelectionComboBox.Items.AddRange(new object[] {
             "Boomilever",
@@ -153,7 +156,7 @@
             // 
             this.AuthenticationGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.AuthenticationGroupBox.Controls.Add(this.textBox1);
+            this.AuthenticationGroupBox.Controls.Add(this.AuthenticationTextBox);
             this.AuthenticationGroupBox.Controls.Add(this.AuthenticationLabel);
             this.AuthenticationGroupBox.Location = new System.Drawing.Point(12, 62);
             this.AuthenticationGroupBox.Name = "AuthenticationGroupBox";
@@ -162,13 +165,13 @@
             this.AuthenticationGroupBox.TabStop = false;
             this.AuthenticationGroupBox.Text = "Authentication";
             // 
-            // textBox1
+            // AuthenticationTextBox
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(373, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 1;
+            this.AuthenticationTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AuthenticationTextBox.Location = new System.Drawing.Point(373, 13);
+            this.AuthenticationTextBox.Name = "AuthenticationTextBox";
+            this.AuthenticationTextBox.Size = new System.Drawing.Size(121, 20);
+            this.AuthenticationTextBox.TabIndex = 1;
             // 
             // AuthenticationLabel
             // 
@@ -181,7 +184,7 @@
             // 
             // SetTiersButton
             // 
-            this.SetTiersButton.Location = new System.Drawing.Point(249, 32);
+            this.SetTiersButton.Location = new System.Drawing.Point(249, 3);
             this.SetTiersButton.Name = "SetTiersButton";
             this.SetTiersButton.Size = new System.Drawing.Size(117, 23);
             this.SetTiersButton.TabIndex = 13;
@@ -191,7 +194,7 @@
             // 
             // SetTeamsButton
             // 
-            this.SetTeamsButton.Location = new System.Drawing.Point(3, 32);
+            this.SetTeamsButton.Location = new System.Drawing.Point(3, 3);
             this.SetTeamsButton.Name = "SetTeamsButton";
             this.SetTeamsButton.Size = new System.Drawing.Size(117, 23);
             this.SetTeamsButton.TabIndex = 11;
@@ -221,14 +224,14 @@
             this.SetDataTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.SetDataTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.SetDataTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.SetDataTableLayoutPanel.Controls.Add(this.TiersLabel, 3, 1);
-            this.SetDataTableLayoutPanel.Controls.Add(this.TeamsLabel, 1, 1);
-            this.SetDataTableLayoutPanel.Controls.Add(this.TiebreakersLabel, 3, 0);
-            this.SetDataTableLayoutPanel.Controls.Add(this.SetScoresButton, 0, 0);
-            this.SetDataTableLayoutPanel.Controls.Add(this.SetTeamsButton, 0, 1);
-            this.SetDataTableLayoutPanel.Controls.Add(this.SetTiebreakersButton, 2, 0);
-            this.SetDataTableLayoutPanel.Controls.Add(this.SetTiersButton, 2, 1);
-            this.SetDataTableLayoutPanel.Controls.Add(this.ScoresLabel, 1, 0);
+            this.SetDataTableLayoutPanel.Controls.Add(this.TiebreakersLabel, 3, 1);
+            this.SetDataTableLayoutPanel.Controls.Add(this.ScoresLabel, 1, 1);
+            this.SetDataTableLayoutPanel.Controls.Add(this.TiersLabel, 3, 0);
+            this.SetDataTableLayoutPanel.Controls.Add(this.SetScoresButton, 0, 1);
+            this.SetDataTableLayoutPanel.Controls.Add(this.SetTiebreakersButton, 2, 1);
+            this.SetDataTableLayoutPanel.Controls.Add(this.TeamsLabel, 1, 0);
+            this.SetDataTableLayoutPanel.Controls.Add(this.SetTeamsButton, 0, 0);
+            this.SetDataTableLayoutPanel.Controls.Add(this.SetTiersButton, 2, 0);
             this.SetDataTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.SetDataTableLayoutPanel.Location = new System.Drawing.Point(3, 16);
             this.SetDataTableLayoutPanel.Name = "SetDataTableLayoutPanel";
@@ -238,42 +241,42 @@
             this.SetDataTableLayoutPanel.Size = new System.Drawing.Size(494, 58);
             this.SetDataTableLayoutPanel.TabIndex = 15;
             // 
-            // TiersLabel
-            // 
-            this.TiersLabel.AutoSize = true;
-            this.TiersLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TiersLabel.Location = new System.Drawing.Point(372, 29);
-            this.TiersLabel.Name = "TiersLabel";
-            this.TiersLabel.Size = new System.Drawing.Size(119, 29);
-            this.TiersLabel.TabIndex = 18;
-            this.TiersLabel.Text = "Tiers:";
-            this.TiersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // TeamsLabel
-            // 
-            this.TeamsLabel.AutoSize = true;
-            this.TeamsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TeamsLabel.Location = new System.Drawing.Point(126, 29);
-            this.TeamsLabel.Name = "TeamsLabel";
-            this.TeamsLabel.Size = new System.Drawing.Size(117, 29);
-            this.TeamsLabel.TabIndex = 17;
-            this.TeamsLabel.Text = "Teams:";
-            this.TeamsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // TiebreakersLabel
             // 
             this.TiebreakersLabel.AutoSize = true;
             this.TiebreakersLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TiebreakersLabel.Location = new System.Drawing.Point(372, 0);
+            this.TiebreakersLabel.Location = new System.Drawing.Point(372, 29);
             this.TiebreakersLabel.Name = "TiebreakersLabel";
             this.TiebreakersLabel.Size = new System.Drawing.Size(119, 29);
-            this.TiebreakersLabel.TabIndex = 16;
+            this.TiebreakersLabel.TabIndex = 18;
             this.TiebreakersLabel.Text = "Tiebreakers:";
             this.TiebreakersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // ScoresLabel
+            // 
+            this.ScoresLabel.AutoSize = true;
+            this.ScoresLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScoresLabel.Location = new System.Drawing.Point(126, 29);
+            this.ScoresLabel.Name = "ScoresLabel";
+            this.ScoresLabel.Size = new System.Drawing.Size(117, 29);
+            this.ScoresLabel.TabIndex = 17;
+            this.ScoresLabel.Text = "Scores:";
+            this.ScoresLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // TiersLabel
+            // 
+            this.TiersLabel.AutoSize = true;
+            this.TiersLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TiersLabel.Location = new System.Drawing.Point(372, 0);
+            this.TiersLabel.Name = "TiersLabel";
+            this.TiersLabel.Size = new System.Drawing.Size(119, 29);
+            this.TiersLabel.TabIndex = 16;
+            this.TiersLabel.Text = "Tiers:";
+            this.TiersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // SetScoresButton
             // 
-            this.SetScoresButton.Location = new System.Drawing.Point(3, 3);
+            this.SetScoresButton.Location = new System.Drawing.Point(3, 32);
             this.SetScoresButton.Name = "SetScoresButton";
             this.SetScoresButton.Size = new System.Drawing.Size(117, 23);
             this.SetScoresButton.TabIndex = 12;
@@ -283,7 +286,7 @@
             // 
             // SetTiebreakersButton
             // 
-            this.SetTiebreakersButton.Location = new System.Drawing.Point(249, 3);
+            this.SetTiebreakersButton.Location = new System.Drawing.Point(249, 32);
             this.SetTiebreakersButton.Name = "SetTiebreakersButton";
             this.SetTiebreakersButton.Size = new System.Drawing.Size(117, 23);
             this.SetTiebreakersButton.TabIndex = 14;
@@ -291,16 +294,16 @@
             this.SetTiebreakersButton.UseVisualStyleBackColor = true;
             this.SetTiebreakersButton.Click += new System.EventHandler(this.SetTiebreakersButton_Click);
             // 
-            // ScoresLabel
+            // TeamsLabel
             // 
-            this.ScoresLabel.AutoSize = true;
-            this.ScoresLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ScoresLabel.Location = new System.Drawing.Point(126, 0);
-            this.ScoresLabel.Name = "ScoresLabel";
-            this.ScoresLabel.Size = new System.Drawing.Size(117, 29);
-            this.ScoresLabel.TabIndex = 15;
-            this.ScoresLabel.Text = "Scores: ";
-            this.ScoresLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TeamsLabel.AutoSize = true;
+            this.TeamsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TeamsLabel.Location = new System.Drawing.Point(126, 0);
+            this.TeamsLabel.Name = "TeamsLabel";
+            this.TeamsLabel.Size = new System.Drawing.Size(117, 29);
+            this.TeamsLabel.TabIndex = 15;
+            this.TeamsLabel.Text = "Teams:";
+            this.TeamsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // WizardForm
             // 
@@ -317,6 +320,7 @@
             this.Name = "WizardForm";
             this.ShowIcon = false;
             this.Text = "Submit Grades";
+            this.Load += new System.EventHandler(this.WizardForm_Load);
             this.ResizeEnd += new System.EventHandler(this.WizardForm_ResizeEnd);
             this.EventSelectionGroupBox.ResumeLayout(false);
             this.EventSelectionGroupBox.PerformLayout();
@@ -343,7 +347,7 @@
         private System.Windows.Forms.GroupBox EventSelectionGroupBox;
         private System.Windows.Forms.ComboBox EventSelectionComboBox;
         private System.Windows.Forms.GroupBox AuthenticationGroupBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox AuthenticationTextBox;
         private System.Windows.Forms.Label AuthenticationLabel;
         private System.Windows.Forms.GroupBox DataGroupBox;
         private System.Windows.Forms.Button SetTeamsButton;
@@ -351,9 +355,9 @@
         private System.Windows.Forms.TableLayoutPanel SetDataTableLayoutPanel;
         private System.Windows.Forms.Button SetTiebreakersButton;
         private System.Windows.Forms.Button SetScoresButton;
-        private System.Windows.Forms.Label TiersLabel;
-        private System.Windows.Forms.Label TeamsLabel;
         private System.Windows.Forms.Label TiebreakersLabel;
         private System.Windows.Forms.Label ScoresLabel;
+        private System.Windows.Forms.Label TiersLabel;
+        private System.Windows.Forms.Label TeamsLabel;
     }
 }

@@ -1,4 +1,6 @@
-﻿using Olympiad_Grading.DataConfirmation.Models;
+﻿using Olympiad_Grading.AvaComm;
+using Olympiad_Grading.AvaComm.Poco;
+using Olympiad_Grading.DataConfirmation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,19 @@ namespace Olympiad_Grading.Wizard
     {
         public TeamScores TeamScores { get; set; }
 
+        public string authKey = "";
+        public string urlEnd = ""; // need to set to used in the DataConfirmationForm
+        private const string TEMP_URL = "http://requestb.in/12p2cv01"; // current end point for testing
+
         public WizardForm()
         {
             InitializeComponent();
             this.TeamScores = new TeamScores();
+        }
+
+        private void WizardForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void WizardForm_ResizeEnd(object sender, EventArgs e)
@@ -28,90 +39,42 @@ namespace Olympiad_Grading.Wizard
 
         private void SetScoresButton_Click(object sender, EventArgs e)
         {
-            double[] scores;
-            try
-            {
-                scores = this.ParseCurrentSelection()
-                    .Select<string, double>(x => Convert.ToDouble(x))
-                    .ToArray<double>();
 
-                if (scores.Length == this.TeamScores.Names.Length)
-                {
-                    this.TeamScores.Scores = scores;
-                }
-                else
-                {
-                    MessageBox.Show(String.Format("There has to be the same number of team scores as team names.\n\n currently there are {0} team names and you have selected {1} scores", this.TeamScores.Names.Length, scores.Length));
-                }
+            Excel.Worksheet ws = Globals.ThisAddIn.Application.ActiveSheet;
+            this.WindowState = FormWindowState.Minimized;
 
-            }
-            catch
-            {
-                MessageBox.Show("The data entered is not all numbers");
-            }
+            ws.SelectionChange += Scores_SelectionChange;
 
         }
 
         private void SetTeamsButton_Click(object sender, EventArgs e)
         {
-            this.TeamScores.Names = this.ParseCurrentSelection().ToArray<String>();
+            Excel.Worksheet ws = Globals.ThisAddIn.Application.ActiveSheet;
+            this.WindowState = FormWindowState.Minimized;
+
+            ws.SelectionChange += Teams_SelectionChange;
         }
 
         private void SetTiebreakersButton_Click(object sender, EventArgs e)
         {
-            int[] tiebreakers;
-            try
-            {
-                tiebreakers = this.ParseCurrentSelection()
-                    .Select<string, int>(x => Convert.ToInt32(x))
-                    .ToArray<int>();
+            Excel.Worksheet ws = Globals.ThisAddIn.Application.ActiveSheet;
+            this.WindowState = FormWindowState.Minimized;
 
-                if (tiebreakers.Length == this.TeamScores.Names.Length)
-                {
-                    this.TeamScores.Tiebreakers = tiebreakers;
-                    this.UpdateScoresListView();
-                }
-                else
-                {
-                    MessageBox.Show(String.Format("There has to be the same number of tiebreaker values as teams.\n\n currently there are {0} teams and you have selected {1} tiebreaker values", this.TeamScores.Names.Length, tiebreakers.Length));
-                }
-
-            }
-            catch
-            {
-                MessageBox.Show("The data entered is not all whole numbers");
-            }
+            ws.SelectionChange += Tiebreakers_SelectionChange;
         }
 
         private void SetTiersButton_Click(object sender, EventArgs e)
         {
-            int[] tiers;
-            try
-            {
-                tiers = this.ParseCurrentSelection()
-                    .Select<string, int>(x => Convert.ToInt32(x))
-                    .ToArray<int>();
+            Excel.Worksheet ws = Globals.ThisAddIn.Application.ActiveSheet;
+            this.WindowState = FormWindowState.Minimized;
 
-                if (tiers.Length == this.TeamScores.Names.Length)
-                {
-                    this.TeamScores.Tiers = tiers;
-                }
-                else
-                {
-                    MessageBox.Show(String.Format("There has to be the same number of tier values as teams.\n\n currently there are {0} teams and you have selected {1} tier values", this.TeamScores.Names.Length, tiers.Length));
-                }
-
-            }
-            catch
-            {
-                MessageBox.Show("The data entered is not all whole numbers");
-            }
+            ws.SelectionChange += Tiers_SelectionChange;
         }
 
-        private IEnumerable<String> ParseCurrentSelection()
+        private IEnumerable<String> ParseSelection(Excel.Range range)
         {
             var currentApp = Globals.ThisAddIn.Application as Excel.Application;
-            var selected = currentApp.Selection as Excel.Range;
+            var selected = range;
 
             IEnumerable<String> nameData = new List<String>();
 
@@ -134,17 +97,143 @@ namespace Olympiad_Grading.Wizard
 
             if (this.TeamScores.IsRectangular())
             {
-                MessageBox.Show("This is good");
                 for (int i = 0; i < this.TeamScores.Names.Count(); i++)
                 {
                     this.ScoresListView.Items.Add(new ListViewItem(new string[] { this.TeamScores.Names[i], Convert.ToString(this.TeamScores.Scores[i]), Convert.ToString(this.TeamScores.Tiers[i]), Convert.ToString(this.TeamScores.Tiebreakers[i]) }));
                 }
             }
-            else
+        }
+
+        private void SubmitButton_Click(object sender, EventArgs e)
+        {
+            this.MakeRequest();
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Press \"Cancel\" to remain on this page or press \"OK\" to close the wizard.", "Are You Sure", MessageBoxButtons.OKCancel);
+
+            if (result == DialogResult.OK)
             {
-                MessageBox.Show("no no no");
+                this.Close();
             }
         }
+
+        private void MakeRequest()
+        {
+            var jsonRequest = new JsonRequest(TEMP_URL, "POST", new ApiAuth(this.AuthenticationTextBox.Text));
+            var response = jsonRequest.Execute(this.TeamScores);
+            MessageBox.Show(response.ToString());
+        }
+
+        void Teams_SelectionChange(Excel.Range range)
+        {
+
+            this.TeamScores.Names = this.ParseSelection(range).ToArray<String>();
+
+            this.WindowState = FormWindowState.Normal;
+            this.Activate();
+
+            Excel.Worksheet ws = Globals.ThisAddIn.Application.ActiveSheet;
+            ws.SelectionChange -= Teams_SelectionChange;
+        }
+
+        void Scores_SelectionChange(Excel.Range range)
+        {
+
+            double[] scores;
+            try
+            {
+                scores = this.ParseSelection(range)
+                    .Select<string, double>(x => Convert.ToDouble(x))
+                    .ToArray<double>();
+
+                if (scores.Length == this.TeamScores.Names.Length)
+                {
+                    this.TeamScores.Scores = scores;
+                    this.UpdateScoresListView();
+                }
+                else
+                {
+                    MessageBox.Show(String.Format("There has to be the same number of team scores as team names.\n\n currently there are {0} team names and you have selected {1} scores", this.TeamScores.Names.Length, scores.Length));
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("The data entered is not all numbers");
+            }
+            this.WindowState = FormWindowState.Normal;
+            this.Activate();
+
+            Excel.Worksheet ws = Globals.ThisAddIn.Application.ActiveSheet;
+            ws.SelectionChange -= Scores_SelectionChange;
+        }
+
+        void Tiers_SelectionChange(Excel.Range range)
+        {
+
+            int[] tiers;
+            try
+            {
+                tiers = this.ParseSelection(range)
+                    .Select<string, int>(x => Convert.ToInt32(x))
+                    .ToArray<int>();
+
+                if (tiers.Length == this.TeamScores.Names.Length)
+                {
+                    this.TeamScores.Tiers = tiers;
+                    this.UpdateScoresListView();
+                }
+                else
+                {
+                    MessageBox.Show(String.Format("There has to be the same number of tier values as teams.\n\n currently there are {0} teams and you have selected {1} tier values", this.TeamScores.Names.Length, tiers.Length));
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("The data entered is not all whole numbers");
+            }
+            this.WindowState = FormWindowState.Normal;
+            this.Activate();
+
+            Excel.Worksheet ws = Globals.ThisAddIn.Application.ActiveSheet;
+            ws.SelectionChange -= Tiers_SelectionChange;
+        }
+
+        void Tiebreakers_SelectionChange(Excel.Range range)
+        {
+
+            int[] tiebreakers;
+            try
+            {
+                tiebreakers = this.ParseSelection(range)
+                    .Select<string, int>(x => Convert.ToInt32(x))
+                    .ToArray<int>();
+
+                if (tiebreakers.Length == this.TeamScores.Names.Length)
+                {
+                    this.TeamScores.Tiebreakers = tiebreakers;
+                    this.UpdateScoresListView();
+                }
+                else
+                {
+                    MessageBox.Show(String.Format("There has to be the same number of tiebreaker values as teams.\n\n currently there are {0} teams and you have selected {1} tiebreaker values", this.TeamScores.Names.Length, tiebreakers.Length));
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("The data entered is not all whole numbers");
+            }
+            this.WindowState = FormWindowState.Normal;
+            this.Activate();
+
+            Excel.Worksheet ws = Globals.ThisAddIn.Application.ActiveSheet;
+            ws.SelectionChange -= Tiebreakers_SelectionChange;
+        }
+
     }
 }
 
