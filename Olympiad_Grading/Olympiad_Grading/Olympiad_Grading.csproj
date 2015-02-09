@@ -226,6 +226,7 @@
     <Compile Include="DataConfirmation\Models\Score.cs" />
     <Compile Include="DataConfirmation\Models\ScoreModel.cs" />
     <Compile Include="DataConfirmation\Models\TeamScores.cs" />
+    <Compile Include="Flags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

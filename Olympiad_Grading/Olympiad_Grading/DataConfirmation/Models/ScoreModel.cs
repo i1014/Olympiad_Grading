@@ -20,7 +20,7 @@ namespace Olympiad_Grading.DataConfirmation.Models
             {
                 for(int i = 0; i < scores.Names.Count(); i++)
                 {
-                    TeamScoreList.Add(new TeamScore(scores.Names[i], scores.Scores[i], scores.Tiers[i]));
+                    TeamScoreList.Add(new TeamScore(scores.Names[i], scores.Scores[i], scores.Tiers[i], scores.Flags[i]));
                 }
 
             }

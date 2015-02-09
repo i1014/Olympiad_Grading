@@ -90,7 +90,7 @@ namespace Olympiad_Grading.Wizard
             {
                 for (int i = 0; i < this.TeamScores.Names.Count(); i++)
                 {
-                    this.ScoresListView.Items.Add(new ListViewItem(new string[] { this.TeamScores.Names[i], Convert.ToString(this.TeamScores.Scores[i]), Convert.ToString(this.TeamScores.Tiers[i]) }));
+                    this.ScoresListView.Items.Add(new ListViewItem(new string[] { this.TeamScores.Names[i], this.TeamScores.Scores[i] == null ? this.TeamScores.Flags[i] : Convert.ToString(this.TeamScores.Scores[i]), Convert.ToString(this.TeamScores.Tiers[i]) }));
                 }
             }
         }
@@ -112,7 +112,7 @@ namespace Olympiad_Grading.Wizard
 
         private void MakeRequest()
         {
-            var jsonRequest = new JsonRequest(TEMP_URL, "POST", new ApiAuth(this.AuthenticationTextBox.Text));
+            var jsonRequest = new JsonRequest(TEMP_URL, "POST",new BasicAuth(this.UsernameTextbox.Text, this.AuthenticationTextBox.Text));
             ScoreModel scoreModel = new ScoreModel(this.TeamScores);
             var response = jsonRequest.Execute(scoreModel);
             MessageBox.Show(response.ToString());
@@ -133,27 +133,53 @@ namespace Olympiad_Grading.Wizard
         void Scores_SelectionChange(Excel.Range range)
         {
 
-            double[] scores;
+            List<double?> rawScores = new List<double?>();
+            List<string> flags = new List<string>();
             try
             {
-                scores = this.ParseSelection(range)
-                    .Select<string, double>(x => Convert.ToDouble(x))
-                    .ToArray<double>();
-
-                if (scores.Length == this.TeamScores.Names.Length)
+                IEnumerable<String> scores = this.ParseSelection(range);
+                
+                foreach(string score in scores)
                 {
-                    this.TeamScores.Scores = scores;
+                    if (score.Equals(Flags.DQ))
+                    {
+                        rawScores.Add(null);
+                        flags.Add(Flags.DQ);
+                    } 
+                    else if (score.Equals(Flags.NS))
+                    {
+                        rawScores.Add(null);
+                        flags.Add(Flags.NS);
+                    }
+                    else if (score.Equals(Flags.P))
+                    {
+                        rawScores.Add(null);
+                        flags.Add(Flags.P);
+                    }
+                    else
+                    {
+                        rawScores.Add(Convert.ToDouble(score));
+                        flags.Add(null);
+                    }
+                }
+                    //.Select<string, double?>(x => Convert.ToDouble(x))
+                    //.ToArray<double?>();
+
+                if (rawScores.Count == this.TeamScores.Names.Length)
+                {
+                    this.TeamScores.Scores = rawScores.ToArray();
+                    this.TeamScores.Flags = flags.ToArray();
                     this.UpdateScoresListView();
                 }
                 else
                 {
-                    MessageBox.Show(String.Format("There has to be the same number of team scores as team names.\n\n currently there are {0} team names and you have selected {1} scores", this.TeamScores.Names.Length, scores.Length));
+                    MessageBox.Show(String.Format("There has to be the same number of team scores as team names.\n\n currently there are {0} team names and you have selected {1} scores", this.TeamScores.Names.Length, scores.Count()));
                 }
 
             }
             catch
             {
-                MessageBox.Show("The data entered is not all numbers");
+                MessageBox.Show("The data entered is not all numbers or valid non-numeric values.\nThe availible non-numeric values are NS, DQ, and P");
             }
             this.WindowState = FormWindowState.Normal;
             this.Activate();

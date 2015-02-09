@@ -134,7 +134,7 @@ namespace Olympiad_Grading.AvaComm
 
             if (Credentials != null)
                 basicRequest.Headers.Add("Authorization", Credentials.toAuth());
-
+            
             return basicRequest;
         }
 

@@ -39,12 +39,14 @@
             this.EventSelectionComboBox = new System.Windows.Forms.ComboBox();
             this.AuthenticationGroupBox = new System.Windows.Forms.GroupBox();
             this.AuthenticationTextBox = new System.Windows.Forms.TextBox();
-            this.AuthenticationLabel = new System.Windows.Forms.Label();
+            this.UsernameLabel = new System.Windows.Forms.Label();
             this.SetTiersButton = new System.Windows.Forms.Button();
             this.SetTeamsButton = new System.Windows.Forms.Button();
             this.DataGroupBox = new System.Windows.Forms.GroupBox();
             this.SetDataTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SetScoresButton = new System.Windows.Forms.Button();
+            this.UsernameTextbox = new System.Windows.Forms.TextBox();
+            this.AuthenticationLabel = new System.Windows.Forms.Label();
             this.EventSelectionGroupBox.SuspendLayout();
             this.AuthenticationGroupBox.SuspendLayout();
             this.DataGroupBox.SuspendLayout();
@@ -55,7 +57,7 @@
             // 
             this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(430, 457);
+            this.CancelButton.Location = new System.Drawing.Point(430, 487);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(82, 32);
             this.CancelButton.TabIndex = 4;
@@ -66,7 +68,7 @@
             // SubmitButton
             // 
             this.SubmitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SubmitButton.Location = new System.Drawing.Point(342, 457);
+            this.SubmitButton.Location = new System.Drawing.Point(342, 487);
             this.SubmitButton.Name = "SubmitButton";
             this.SubmitButton.Size = new System.Drawing.Size(82, 32);
             this.SubmitButton.TabIndex = 5;
@@ -80,12 +82,11 @@
             this.Team,
             this.Score,
             this.Tier});
-            this.ScoresListView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ScoresListView.GridLines = true;
-            this.ScoresListView.Location = new System.Drawing.Point(3, 51);
+            this.ScoresListView.Location = new System.Drawing.Point(0, 51);
             this.ScoresListView.Name = "ScoresListView";
             this.ScoresListView.Scrollable = false;
-            this.ScoresListView.Size = new System.Drawing.Size(494, 289);
+            this.ScoresListView.Size = new System.Drawing.Size(494, 286);
             this.ScoresListView.TabIndex = 6;
             this.ScoresListView.UseCompatibleStateImageBehavior = false;
             this.ScoresListView.View = System.Windows.Forms.View.Details;
@@ -146,11 +147,13 @@
             // 
             this.AuthenticationGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.AuthenticationGroupBox.Controls.Add(this.AuthenticationTextBox);
             this.AuthenticationGroupBox.Controls.Add(this.AuthenticationLabel);
+            this.AuthenticationGroupBox.Controls.Add(this.UsernameTextbox);
+            this.AuthenticationGroupBox.Controls.Add(this.AuthenticationTextBox);
+            this.AuthenticationGroupBox.Controls.Add(this.UsernameLabel);
             this.AuthenticationGroupBox.Location = new System.Drawing.Point(12, 62);
             this.AuthenticationGroupBox.Name = "AuthenticationGroupBox";
-            this.AuthenticationGroupBox.Size = new System.Drawing.Size(500, 39);
+            this.AuthenticationGroupBox.Size = new System.Drawing.Size(500, 73);
             this.AuthenticationGroupBox.TabIndex = 9;
             this.AuthenticationGroupBox.TabStop = false;
             this.AuthenticationGroupBox.Text = "Authentication";
@@ -158,19 +161,19 @@
             // AuthenticationTextBox
             // 
             this.AuthenticationTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.AuthenticationTextBox.Location = new System.Drawing.Point(373, 13);
+            this.AuthenticationTextBox.Location = new System.Drawing.Point(373, 42);
             this.AuthenticationTextBox.Name = "AuthenticationTextBox";
             this.AuthenticationTextBox.Size = new System.Drawing.Size(121, 20);
             this.AuthenticationTextBox.TabIndex = 1;
             // 
-            // AuthenticationLabel
+            // UsernameLabel
             // 
-            this.AuthenticationLabel.AutoSize = true;
-            this.AuthenticationLabel.Location = new System.Drawing.Point(6, 16);
-            this.AuthenticationLabel.Name = "AuthenticationLabel";
-            this.AuthenticationLabel.Size = new System.Drawing.Size(124, 13);
-            this.AuthenticationLabel.TabIndex = 0;
-            this.AuthenticationLabel.Text = "Enter Authentication Key";
+            this.UsernameLabel.AutoSize = true;
+            this.UsernameLabel.Location = new System.Drawing.Point(6, 19);
+            this.UsernameLabel.Name = "UsernameLabel";
+            this.UsernameLabel.Size = new System.Drawing.Size(83, 13);
+            this.UsernameLabel.TabIndex = 0;
+            this.UsernameLabel.Text = "Enter Username";
             // 
             // SetTiersButton
             // 
@@ -204,9 +207,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGroupBox.Controls.Add(this.SetDataTableLayoutPanel);
             this.DataGroupBox.Controls.Add(this.ScoresListView);
-            this.DataGroupBox.Location = new System.Drawing.Point(12, 107);
+            this.DataGroupBox.Location = new System.Drawing.Point(12, 141);
             this.DataGroupBox.Name = "DataGroupBox";
-            this.DataGroupBox.Size = new System.Drawing.Size(500, 343);
+            this.DataGroupBox.Size = new System.Drawing.Size(500, 340);
             this.DataGroupBox.TabIndex = 10;
             this.DataGroupBox.TabStop = false;
             this.DataGroupBox.Text = "Scores";
@@ -245,12 +248,29 @@
             this.SetScoresButton.UseVisualStyleBackColor = true;
             this.SetScoresButton.Click += new System.EventHandler(this.SetScoresButton_Click);
             // 
+            // UsernameTextbox
+            // 
+            this.UsernameTextbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UsernameTextbox.Location = new System.Drawing.Point(373, 16);
+            this.UsernameTextbox.Name = "UsernameTextbox";
+            this.UsernameTextbox.Size = new System.Drawing.Size(121, 20);
+            this.UsernameTextbox.TabIndex = 2;
+            // 
+            // AuthenticationLabel
+            // 
+            this.AuthenticationLabel.AutoSize = true;
+            this.AuthenticationLabel.Location = new System.Drawing.Point(6, 45);
+            this.AuthenticationLabel.Name = "AuthenticationLabel";
+            this.AuthenticationLabel.Size = new System.Drawing.Size(124, 13);
+            this.AuthenticationLabel.TabIndex = 3;
+            this.AuthenticationLabel.Text = "Enter Authentication Key";
+            // 
             // WizardForm
             // 
             this.AcceptButton = this.SubmitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 501);
+            this.ClientSize = new System.Drawing.Size(524, 531);
             this.Controls.Add(this.DataGroupBox);
             this.Controls.Add(this.AuthenticationGroupBox);
             this.Controls.Add(this.EventSelectionGroupBox);
@@ -286,11 +306,13 @@
         private System.Windows.Forms.ComboBox EventSelectionComboBox;
         private System.Windows.Forms.GroupBox AuthenticationGroupBox;
         private System.Windows.Forms.TextBox AuthenticationTextBox;
-        private System.Windows.Forms.Label AuthenticationLabel;
+        private System.Windows.Forms.Label UsernameLabel;
         private System.Windows.Forms.GroupBox DataGroupBox;
         private System.Windows.Forms.Button SetTeamsButton;
         private System.Windows.Forms.Button SetTiersButton;
         private System.Windows.Forms.TableLayoutPanel SetDataTableLayoutPanel;
         private System.Windows.Forms.Button SetScoresButton;
+        private System.Windows.Forms.Label AuthenticationLabel;
+        private System.Windows.Forms.TextBox UsernameTextbox;
     }
 }
