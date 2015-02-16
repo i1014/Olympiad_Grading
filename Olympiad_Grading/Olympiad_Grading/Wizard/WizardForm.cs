@@ -13,6 +13,8 @@ namespace Olympiad_Grading.Wizard
     {
         public TeamScores TeamScores { get; set; }
 
+        public readonly static int DEFAULT_TIER = 10;
+
         public string authKey = "";
         public string urlEnd = ""; // need to set to used in the DataConfirmationForm
         private const string TEMP_URL = "http://requestb.in/17iwh9m1"; // current end point for testing
@@ -97,12 +99,19 @@ namespace Olympiad_Grading.Wizard
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            this.MakeRequest();
+            if (ContainsDuplicates(this.TeamScores.Scores, this.TeamScores.Tiers))
+            {
+                this.MakeRequest();
+            }
+            else
+            {
+                MessageBox.Show("The scores submitted have a tie, please add a small decimal (0.1) to one of the scores to break the tie.");
+            }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Press \"Cancel\" to remain on this page or press \"OK\" to close the wizard.", "Are You Sure", MessageBoxButtons.OKCancel);
+            var result = MessageBox.Show("Press \"Cancel\" to close this dialog or press \"OK\" to close the wizard.", "Are You Sure", MessageBoxButtons.OKCancel);
 
             if (result == DialogResult.OK)
             {
@@ -112,7 +121,7 @@ namespace Olympiad_Grading.Wizard
 
         private void MakeRequest()
         {
-            var jsonRequest = new JsonRequest(TEMP_URL, "POST",new BasicAuth(this.UsernameTextbox.Text, this.AuthenticationTextBox.Text));
+            var jsonRequest = new JsonRequest(TEMP_URL, "POST", new BasicAuth(this.UsernameTextbox.Text, this.AuthenticationTextBox.Text));
             ScoreModel scoreModel = new ScoreModel(this.TeamScores);
             var response = jsonRequest.Execute(scoreModel);
             MessageBox.Show(response.ToString());
@@ -138,14 +147,14 @@ namespace Olympiad_Grading.Wizard
             try
             {
                 IEnumerable<String> scores = this.ParseSelection(range);
-                
-                foreach(string score in scores)
+
+                foreach (string score in scores)
                 {
                     if (score.Equals(Flags.DQ))
                     {
                         rawScores.Add(null);
                         flags.Add(Flags.DQ);
-                    } 
+                    }
                     else if (score.Equals(Flags.NS))
                     {
                         rawScores.Add(null);
@@ -162,8 +171,8 @@ namespace Olympiad_Grading.Wizard
                         flags.Add(null);
                     }
                 }
-                    //.Select<string, double?>(x => Convert.ToDouble(x))
-                    //.ToArray<double?>();
+                //.Select<string, double?>(x => Convert.ToDouble(x))
+                //.ToArray<double?>();
 
                 if (rawScores.Count == this.TeamScores.Names.Length)
                 {
@@ -191,28 +200,33 @@ namespace Olympiad_Grading.Wizard
         void Tiers_SelectionChange(Excel.Range range)
         {
 
-            int[] tiers;
-            try
-            {
-                tiers = this.ParseSelection(range)
-                    .Select<string, int>(x => Convert.ToInt32(x))
-                    .ToArray<int>();
-
-                if (tiers.Length == this.TeamScores.Names.Length)
+                IEnumerable<String> rawTiers = this.ParseSelection(range);
+                var tiers = new List<int>();
+                foreach (String tier in rawTiers)
                 {
-                    this.TeamScores.Tiers = tiers;
+                    try
+                    {
+                        tiers.Add( Convert.ToInt32(tier) );
+                    } 
+                    catch //(Exception e)
+                    {
+                        tiers.Add( DEFAULT_TIER );
+                    }
+
+                }
+
+                if (tiers.Count() == this.TeamScores.Names.Length)
+                {
+                    this.TeamScores.Tiers = tiers.ToArray();
                     this.UpdateScoresListView();
                 }
                 else
                 {
-                    MessageBox.Show(String.Format("There has to be the same number of tier values as teams.\n\n currently there are {0} teams and you have selected {1} tier values", this.TeamScores.Names.Length, tiers.Length));
+                    MessageBox.Show(String.Format("There has to be the same number of tier values as teams.\n\n currently there are {0} teams and you have selected {1} tier values", this.TeamScores.Names.Length, tiers.Count()));
                 }
 
-            }
-            catch
-            {
-                MessageBox.Show("The data entered is not all whole numbers");
-            }
+            
+            
             this.WindowState = FormWindowState.Normal;
             this.Activate();
 
@@ -220,7 +234,34 @@ namespace Olympiad_Grading.Wizard
             ws.SelectionChange -= Tiers_SelectionChange;
         }
 
+        private bool ContainsDuplicates(double?[] scores, int[] tiers)
+        {
+            var duplicateDictionary = new Dictionary<double?, int>();
+
+            for (int i = 0; i < scores.Length; i++)
+            {
+                if (scores[i] != null && duplicateDictionary.ContainsKey(scores[i]) && duplicateDictionary[scores[i]] == tiers[i])
+                {
+                    return false;
+                }
+                else if ( scores[i] != null )
+                {
+                    duplicateDictionary.Add(scores[i], tiers[i]);
+                }
+            }
+
+            return true;
+        }
+
+        private void GetEventListButton_Click(object sender, EventArgs e)
+        {
+            this.EventSelectionComboBox.Items.Add("This");
+            this.EventSelectionComboBox.Items.Add("is");
+            this.EventSelectionComboBox.Items.Add("just");
+            this.EventSelectionComboBox.Items.Add("a");
+            this.EventSelectionComboBox.Items.Add("Test");
+        }
+
     }
 }
 
- 
