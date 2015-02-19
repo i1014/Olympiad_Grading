@@ -1,6 +1,7 @@
 ﻿using Olympiad_Grading.AvaComm;
 using Olympiad_Grading.AvaComm.Poco;
 using Olympiad_Grading.DataConfirmation.Models;
+using Olympiad_Grading.DataConfirmation.Models.EventList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,14 @@ namespace Olympiad_Grading.Wizard
 {
     public partial class WizardForm : Form
     {
-        public TeamScores TeamScores { get; set; }
+        public TeamScores TeamScores { get; private set; }
+        public EventList EventList { get; private set; }
 
         public readonly static int DEFAULT_TIER = 10;
 
-        public string authKey = "";
+        public const string EVENT_LIST_URL = "http://hosted.test.avogadro.ws/api/events";
         public string urlEnd = ""; // need to set to used in the DataConfirmationForm
-        private const string TEMP_URL = "http://requestb.in/17iwh9m1"; // current end point for testing
+        private const string TEMP_URL = "http://hosted.test.avogadro.ws/test/c/score/3/json"; // current end point for testing
 
         public WizardForm()
         {
@@ -131,6 +133,7 @@ namespace Olympiad_Grading.Wizard
         {
 
             this.TeamScores.Names = this.ParseSelection(range).ToArray<String>();
+            this.UpdateScoresListView();
 
             this.WindowState = FormWindowState.Normal;
             this.Activate();
@@ -253,13 +256,24 @@ namespace Olympiad_Grading.Wizard
             return true;
         }
 
-        private void GetEventListButton_Click(object sender, EventArgs e)
+        private void GetEventListButton_Click(object sender, EventArgs ea)
         {
-            this.EventSelectionComboBox.Items.Add("This");
-            this.EventSelectionComboBox.Items.Add("is");
-            this.EventSelectionComboBox.Items.Add("just");
-            this.EventSelectionComboBox.Items.Add("a");
-            this.EventSelectionComboBox.Items.Add("Test");
+            this.EventSelectionComboBox.Items.Clear();
+
+            var jsonRequest = new JsonRequest(EVENT_LIST_URL, "GET", new BasicAuth(this.UsernameTextbox.Text, this.AuthenticationTextBox.Text));
+            var response = jsonRequest.Execute<EventList>();
+            if (response is EventList)
+            {
+                this.EventList = (EventList)response;
+                foreach (Event e in this.EventList.events)
+                {
+                    this.EventSelectionComboBox.Items.Add(e.eventName);
+                }
+            } 
+            else
+            {
+                MessageBox.Show(response.ToString());
+            }
         }
 
     }
