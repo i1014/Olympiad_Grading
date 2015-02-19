@@ -76,14 +76,19 @@ namespace Olympiad_Grading.AvaComm
             try
             {
                 HttpResponse = (HttpWebResponse)HttpRequest.GetResponse();
+                return JsonConvert.DeserializeObject<TT>(ReadResponse());
             }
             catch (WebException error)
             {
                 HttpResponse = (HttpWebResponse)error.Response;
                 return ReadResponseFromError(error);
             }
+            catch
+            {
+                return null;
+            }
 
-            return JsonConvert.DeserializeObject<TT>(ReadResponse());
+
         }
 
         public object Execute(object obj)

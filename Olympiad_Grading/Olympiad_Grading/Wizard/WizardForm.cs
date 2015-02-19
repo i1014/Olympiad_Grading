@@ -18,7 +18,6 @@ namespace Olympiad_Grading.Wizard
         public readonly static int DEFAULT_TIER = 10;
 
         public const string EVENT_LIST_URL = "http://hosted.test.avogadro.ws/api/events";
-        public string urlEnd = ""; // need to set to used in the DataConfirmationForm
         private const string TEMP_URL = "http://hosted.test.avogadro.ws/test/c/score/3/json"; // current end point for testing
 
         public WizardForm()
@@ -259,23 +258,36 @@ namespace Olympiad_Grading.Wizard
         private void GetEventListButton_Click(object sender, EventArgs ea)
         {
             this.EventSelectionComboBox.Items.Clear();
+            this.EventSelectionComboBox.Enabled = false;
 
             var jsonRequest = new JsonRequest(EVENT_LIST_URL, "GET", new BasicAuth(this.UsernameTextbox.Text, this.AuthenticationTextBox.Text));
             var response = jsonRequest.Execute<EventList>();
             if (response is EventList)
             {
                 this.EventList = (EventList)response;
+                
                 foreach (Event e in this.EventList.events)
                 {
                     this.EventSelectionComboBox.Items.Add(e.eventName);
                 }
+
+                if (this.EventList.events.Count() >= 1)
+                {
+                    this.EventSelectionComboBox.Enabled = true;
+                    this.EventSelectionComboBox.SelectedIndex = 0;
+                }
+                else
+                {
+                    this.EventSelectionComboBox.Enabled = false;
+                }
+
             } 
             else
             {
-                MessageBox.Show(response.ToString());
+                this.EventSelectionComboBox.Enabled = false;
+                MessageBox.Show("There are no availible tests for the given user. Ensure that the username and API key were entered correctly");
             }
         }
 
     }
 }
-
