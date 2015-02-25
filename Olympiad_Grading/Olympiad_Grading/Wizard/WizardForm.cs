@@ -15,10 +15,11 @@ namespace Olympiad_Grading.Wizard
         public TeamScores TeamScores { get; private set; }
         public EventList EventList { get; private set; }
 
-        public readonly static int DEFAULT_TIER = 10;
+        private const int DEFAULT_TIER = 10;
 
-        public const string EVENT_LIST_URL = "http://hosted.test.avogadro.ws/api/events";
-        private const string TEMP_URL = "http://hosted.test.avogadro.ws/test/c/score/3/json"; // current end point for testing
+        private const string EVENT_LIST_URL = "http://hosted.test.avogadro.ws/api/events";
+        private const string TEMP_URL = "http://hosted.test.avogadro.ws/test/c/score/3/json";
+        //private const string TEMP_URL = "http://requestb.in/1b5i9mn1";
 
         public WizardForm()
         {

@@ -94,7 +94,7 @@ namespace Olympiad_Grading.AvaComm
         public object Execute(object obj)
         {
             HttpRequest = CreateRequest();
-
+            HttpRequest.AllowAutoRedirect = false;
             WriteStream(obj);
 
             try
