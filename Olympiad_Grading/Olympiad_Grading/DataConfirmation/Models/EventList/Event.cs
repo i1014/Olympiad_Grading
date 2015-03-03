@@ -5,12 +5,11 @@ using System.Text;
 
 namespace Olympiad_Grading.DataConfirmation.Models.EventList
 {
-    public class Event
+    public class OlympiadEvent
     {
-
-        public string tournamentName { get; set; }
-        public string eventName { get; set; }
-        public string eventURI { get; set; }
+        public string TournamentName { get; set; }
+        public string EventName { get; set; }
+        public string EventURI { get; set; }
 
     }
 }

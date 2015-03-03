@@ -36,6 +36,7 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
     <VSTO_TrustAssembliesLocation>true</VSTO_TrustAssembliesLocation>
+    <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <PublishUrl>publish\</PublishUrl>
     <InstallUrl />
@@ -45,7 +46,6 @@
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
-    <IsWebBootstrapper>False</IsWebBootstrapper>
     <ProductName>Olympiad_Grading</ProductName>
     <PublisherName />
     <SupportUrl />
@@ -154,7 +154,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>CAA537FD1EFEAAA34FF6616787DB0857072EE4F8</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>8B79F6DC1B272A00228A939817F288C73B47BAEE</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!--
     This section specifies references for the project.

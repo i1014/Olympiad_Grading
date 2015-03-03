@@ -19,7 +19,6 @@ namespace Olympiad_Grading.Wizard
 
         private const string EVENT_LIST_URL = "http://hosted.test.avogadro.ws/api/events";
         private const string TEMP_URL = "http://hosted.test.avogadro.ws/test/c/score/3/json";
-        //private const string TEMP_URL = "http://requestb.in/1b5i9mn1";
 
         public WizardForm()
         {
@@ -124,6 +123,7 @@ namespace Olympiad_Grading.Wizard
         private void MakeRequest()
         {
             var jsonRequest = new JsonRequest(TEMP_URL, "POST", new BasicAuth(this.UsernameTextbox.Text, this.AuthenticationTextBox.Text));
+            //var jsonRequest = new JsonRequest(this.EventList.Events[this.EventSelectionComboBox.SelectedIndex].EventURI, "POST", new BasicAuth(this.UsernameTextbox.Text, this.AuthenticationTextBox.Text));
             ScoreModel scoreModel = new ScoreModel(this.TeamScores);
             var response = jsonRequest.Execute(scoreModel);
             MessageBox.Show(response.ToString());
@@ -267,12 +267,12 @@ namespace Olympiad_Grading.Wizard
             {
                 this.EventList = (EventList)response;
                 
-                foreach (Event e in this.EventList.events)
+                foreach (OlympiadEvent e in this.EventList.Events)
                 {
-                    this.EventSelectionComboBox.Items.Add(e.eventName);
+                    this.EventSelectionComboBox.Items.Add(e.EventName);
                 }
 
-                if (this.EventList.events.Count() >= 1)
+                if (this.EventList.Events.Count() >= 1)
                 {
                     this.EventSelectionComboBox.Enabled = true;
                     this.EventSelectionComboBox.SelectedIndex = 0;
