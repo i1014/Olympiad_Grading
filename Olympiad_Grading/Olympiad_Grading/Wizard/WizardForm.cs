@@ -5,6 +5,7 @@ using Olympiad_Grading.DataConfirmation.Models.EventList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -19,6 +20,8 @@ namespace Olympiad_Grading.Wizard
 
         private const string EVENT_LIST_URL = "http://hosted.test.avogadro.ws/api/events";
         private const string TEMP_URL = "http://hosted.test.avogadro.ws/test/c/score/3/json";
+
+        private List<HttpStatusCode> VALID_CODES = { HttpStatusCode.Found, HttpStatusCode.SeeOther, HttpStatusCode.OK, HttpStatusCode.Accepted };
 
         public WizardForm()
         {
@@ -126,7 +129,14 @@ namespace Olympiad_Grading.Wizard
             //var jsonRequest = new JsonRequest(this.EventList.Events[this.EventSelectionComboBox.SelectedIndex].EventURI, "POST", new BasicAuth(this.UsernameTextbox.Text, this.AuthenticationTextBox.Text));
             ScoreModel scoreModel = new ScoreModel(this.TeamScores);
             var response = jsonRequest.Execute(scoreModel);
-            MessageBox.Show(response.ToString());
+
+            if (VALID_CODES.Contains(jsonRequest.HttpResponse.StatusCode))
+            {
+                MessageBox.Show("The scores have been sucessfully submited to Avogadro", );
+                //MessageBox.Show(jsonRequest.HttpResponse.StatusDescription, jsonRequest.HttpResponse.StatusCode.ToString());
+            }
+            MessageBox.Show("The scores could not be sent, please double check to make sure all information is entered correctly");
+
         }
 
         void Teams_SelectionChange(Excel.Range range)
@@ -174,8 +184,6 @@ namespace Olympiad_Grading.Wizard
                         flags.Add(null);
                     }
                 }
-                //.Select<string, double?>(x => Convert.ToDouble(x))
-                //.ToArray<double?>();
 
                 if (rawScores.Count == this.TeamScores.Names.Length)
                 {
@@ -211,7 +219,7 @@ namespace Olympiad_Grading.Wizard
                     {
                         tiers.Add( Convert.ToInt32(tier) );
                     } 
-                    catch //(Exception e)
+                    catch
                     {
                         tiers.Add( DEFAULT_TIER );
                     }
